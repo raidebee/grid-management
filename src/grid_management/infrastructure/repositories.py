@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import pickle
+import copy
 
 from src.grid_management.domain.models.grids import AbstractGrid
 
@@ -19,7 +20,7 @@ class GridManagementFileRepository(AbstractGridManagementRepository):
         self.path = path
 
     def save(self, grid: AbstractGrid) -> None:
-        self._grid = grid
+        self._grid = copy.deepcopy(grid)
 
     def load(self) -> AbstractGrid:
         with open(self.path, "rb") as file:
