@@ -1,5 +1,6 @@
 from __future__ import annotations
 from typing import Any
+import copy
 
 from src.grid_management.common.models import Size
 from src.grid_management.domain.models.grids import AbstractGrid
@@ -27,7 +28,7 @@ class FakeGridManagementFileRepository(AbstractGridManagementRepository):
         self._grid = grid
 
     def save(self, grid: AbstractGrid) -> None:
-        self._grid = grid
+        self._grid = copy.deepcopy(grid)
 
     def load(self) -> AbstractGrid:
         return self._grid
